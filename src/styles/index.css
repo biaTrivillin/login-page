@@ -1,6 +1,7 @@
 body {
     background-image: url(../assets/bg.png);
     background-size: cover;
+    animation: appear 2s ease-in-out 1 forwards;
 }
 
 ::-webkit-scrollbar-track {
@@ -12,4 +13,13 @@ body {
 }
 ::-webkit-scrollbar-thumb {
     background-color: #5a5a5a;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 10;
+    }
 }

@@ -52,6 +52,11 @@ function Signup() {
                                         <span className="text-danger form-text">Email address</span>
                                     </div>
 
+                                    <div data-mdb-input-init className="form-outline mb-4">
+                                        <input type="password" id="form3Example4" className="form-control" placeholder="Confirm your password"/>
+                                        <span className="text-danger form-text">Email address</span>
+                                    </div>
+
                                     <div className="form-check d-flex justify-content-center mb-4">
                                         <input className="form-check-input me-2" type="checkbox" value="" id="form2Example33"/>
                                         <label className="form-check-label text-light" htmlFor="form2Example33">

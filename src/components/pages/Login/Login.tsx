@@ -34,7 +34,7 @@ function Login() {
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input type="password" id="form3Example4" className="form-control" placeholder="Password"/>
+                                        <input type="password" id="form3Example4" className="form-control border-danger border-2" placeholder="Password"/>
                                         <span className="text-danger form-text">Password</span>
                                     </div>
 
