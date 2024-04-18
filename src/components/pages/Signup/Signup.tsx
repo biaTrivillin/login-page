@@ -3,8 +3,55 @@ import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
+import { useState } from "react";
+import { confirmPasswordValidation, emailValidation, nameValidation, passwordValidation } from "./utils";
 
 function Signup() {
+
+    const user = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    };
+
+    const [information, setInformation] = useState<User>(user);
+
+    const [errorMessage, setErrorMessage] = useState<User>(user);
+
+    const [errorStyle, setErrorStyle] = useState<User>(user);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setInformation({...information, [name]: value});
+
+    };
+
+    const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const validations = {
+            firstName: nameValidation,
+            lastName: nameValidation,
+            email: emailValidation,
+            password: passwordValidation,
+            confirmPassword: confirmPasswordValidation
+        };
+
+        const name = e.target.name as keyof typeof information;
+
+        if (!validations[name](information[name], information.password)) {
+            setErrorMessage({...errorMessage, [name]: "opacity-100"});
+            setErrorStyle({...errorStyle, [name]: "border-danger border-2"});
+        } else {
+            setErrorMessage({...errorMessage, [name]: "opacity-0"});
+            setErrorStyle({...errorStyle, [name]: ""});
+        }
+
+    };
+
+
     return (
         <section className="background-radial-gradient overflow-hidden">
         
@@ -30,31 +77,31 @@ function Signup() {
                                     <div className="row">
                                         <div className="col-md-6 mb-4">
                                             <div data-mdb-input-init className="form-outline">
-                                                <input type="text" id="form3Example1" className="form-control" placeholder="First name"/>
-                                                <span className="text-danger form-text">Email address</span>
+                                                <input onBlur={handleBlur} onChange={handleChange} name="firstName" type="text" className={`form-control ${errorStyle.firstName}`} placeholder="First name"/>
+                                                <span className={`text-danger form-text opacity-0 ${errorMessage.firstName}`}>Email address</span>
                                             </div>
                                         </div>
                                         <div className="col-md-6 mb-4">
                                             <div data-mdb-input-init className="form-outline">
-                                                <input type="text" id="form3Example2" className="form-control" placeholder="Last name"/>
-                                                <span className="text-danger form-text">Email address</span>
+                                                <input onBlur={handleBlur} onChange={handleChange} name="lastName" type="text" className={`form-control ${errorStyle.lastName}`} placeholder="Last name"/>
+                                                <span className={`text-danger form-text opacity-0 ${errorMessage.lastName}`}>Email address</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input type="email" id="form3Example3" className="form-control" placeholder="Email address"/>
-                                        <span className="text-danger form-text">Email address</span>
+                                        <input onBlur={handleBlur} onChange={handleChange} name="email" type="email" className={`form-control ${errorStyle.email}`} placeholder="Email address"/>
+                                        <span className={`text-danger form-text opacity-0 ${errorMessage.email}`}>Email address</span>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input type="password" id="form3Example4" className="form-control" placeholder="Password"/>
-                                        <span className="text-danger form-text">Email address</span>
+                                        <input onBlur={handleBlur} onChange={handleChange} name="password" type="password" className={`form-control ${errorStyle.password}`} placeholder="Password"/>
+                                        <span className={`text-danger form-text opacity-0 ${errorMessage.password}`}>Email address</span>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input type="password" id="form3Example4" className="form-control" placeholder="Confirm your password"/>
-                                        <span className="text-danger form-text">Email address</span>
+                                        <input onBlur={handleBlur} onChange={handleChange} name="confirmPassword" type="password" className={`form-control ${errorStyle.confirmPassword}`} placeholder="Confirm your password"/>
+                                        <span className={`text-danger form-text opacity-0 ${errorMessage.confirmPassword}`}>Email address</span>
                                     </div>
 
                                     <div className="form-check d-flex justify-content-center mb-4">
@@ -93,3 +140,11 @@ function Signup() {
 }
 
 export default Signup;
+
+interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}

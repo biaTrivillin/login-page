@@ -3,9 +3,29 @@ import { FaGoogle } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
+// import { useAuth } from "../../../context/AuthProvider/useAuth";
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 
 function Login() {
+
+    // const [errorMessage, setErrorMessage] = useState("opacity-0");
+
+    // const navigate = useNavigate();
+
+    // const auth = useAuth();
+
+    // async function handleLogin(values: {email: string, password: string}) {
+        
+    //     try {
+    //         await auth.authenticate(values.email, values.password);
+
+    //         navigate("/profile");
+
+    //     } catch (error) {
+    //         setErrorMessage("");
+    // }
 
     return (
         <section className="background-radial-gradient overflow-hidden">
