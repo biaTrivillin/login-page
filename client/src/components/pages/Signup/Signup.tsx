@@ -8,6 +8,7 @@ import { confirmPasswordValidation, emailValidation, nameValidation, passwordVal
 import { useRegister } from "./useRegister";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { User } from "./types";
 
 function Signup() {
 
@@ -60,10 +61,12 @@ function Signup() {
 
         e.preventDefault();
 
-        useRegister(information.firstName, information.lastName, information.email, information.password);
+        if (nameValidation(information.firstName) && nameValidation(information.lastName) && emailValidation(information.email) && passwordValidation(information.password) && confirmPasswordValidation(information.confirmPassword, information.password)) {
+            useRegister(information.firstName, information.lastName, information.email, information.password);
 
-        navigate("/");
-        
+            navigate("/");
+        }
+
     };
 
 
@@ -88,7 +91,7 @@ function Signup() {
 
                         <div className="card bg-transparent border-0 card_container">
                             <div className="card-body px-4 py-5 px-md-5">
-                                <form onSubmit={handleSubmit}>
+                                <form noValidate onSubmit={handleSubmit}>
                                     <div className="row">
                                         <div className="col-md-6 mb-4">
                                             <div data-mdb-input-init className="form-outline">
@@ -159,11 +162,3 @@ function Signup() {
 }
 
 export default Signup;
-
-interface User {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}

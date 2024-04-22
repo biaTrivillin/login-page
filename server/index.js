@@ -37,29 +37,17 @@ server.post("/register", (req, res) => {
     })
 })
 
-// server.post("/register", (req, res) => {
-//     const firstName = req.body.firstName;
-//     const lastName = req.body.lastName;
-//     const email = req.body.email;
-//     const password = req.body.password;
+server.post("/login", (req, res) => {
+    const email = req.body.email;
 
-//     db.query("SELECT * FROM dados WHERE email = ?", [email], (err, result) => {
-//         if(err) {
-//             res.send(err);
-//         }
-//         if(result.length == 0) {
-//             db.query("INSERT INTO dados (firstname, lastname, email, password) VALUES (?, ?, ?, ?)", [firstName, lastName, email, password], (err, result) => {
-//                 if (err) {
-//                     res.send(err)
-//                 }
-//                 res.send({msg: "cadastro realizado"});
-//             })
-//         }else {
-//             res.send({msg: "email já cadastrado"})
-//         }
+    db.query("SELECT * FROM dados WHERE email = ?", [email], (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+        return res.json(result)
+    })
 
-//     })
-// })
+})
 
 server.listen(3000, () => {
     console.log("Server iniciado e rodando na porta 3000!")

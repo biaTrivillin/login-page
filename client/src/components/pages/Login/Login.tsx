@@ -3,11 +3,17 @@ import "../../../styles/glassmorphism.css";
 // import { FaFacebookF } from "react-icons/fa";
 // import { FaXTwitter } from "react-icons/fa6";
 // import { FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { useAuth } from "../../../context/AuthProvider/useAuth";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
+import { IError, UserLogin } from "./types";
+// import axios from "axios";
+// import { useAuth } from "./useAuth";
+// import { authenticate } from "./utils";
+import { useAuth } from "./useAuth";
+// import { setLocalStorage } from "../../../context/AuthProvider/util";
 
 function Login() {
 
@@ -27,6 +33,61 @@ function Login() {
     //     } catch (error) {
     //         setErrorMessage("");
     // }
+
+    const user = {
+        email: "",
+        password: "",
+    };
+
+    const [information, setInformation] = useState<UserLogin>(user);
+
+    const [errorMessage, setErrorMessage] = useState<IError>({
+        style: "opacity-0",
+        msg: ""
+    });
+
+    const [errorStyleEmail, setErrorStyleEmail] = useState<string>("");
+    const [errorStylePassword, setErrorStylePassword] = useState<string>("");
+    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setInformation({...information, [name]: value});
+
+    };
+
+    const navigate = useNavigate();
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault();
+
+        if (information.email == "" || information.password == "") {
+            setErrorMessage({...errorMessage, msg: "Preencha todos os campos", style: "opacity-10"});
+        } else {
+            setErrorMessage({...errorMessage, style: "opacity-0"});
+        }
+
+        information.email == "" ? setErrorStyleEmail("border-danger border-2") : setErrorStyleEmail("");
+        information.password == "" ? setErrorStylePassword("border-danger border-2") : setErrorStylePassword("");
+
+        const authenticate = async () => {
+            const userPassword = await useAuth(information.email);
+
+            if (userPassword.password == information.password) {
+                localStorage.setItem("token", userPassword.userid);
+                navigate("/profile");
+            } else { 
+                setErrorMessage({...errorMessage, msg: "Incorrect email or password.", style: "opacity-10"});
+                setErrorStyleEmail("border-danger border-2");
+                setErrorStylePassword("border-danger border-2");
+            }
+        };
+
+        authenticate();
+
+    };
+
 
     return (
         <section className="background-radial-gradient overflow-hidden">
@@ -48,15 +109,15 @@ function Login() {
 							<div id="radius-shape-2" className="position-absolute shadow-5-strong"></div> */}
                         <div className="card bg-transparent border-0 card_container">
                             <div className="card-body px-4 py-5 px-md-5">
-                                <form>
+                                <form noValidate onSubmit={handleSubmit}>
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input type="email" id="form3Example3" className="form-control" placeholder="Email address" />
-                                        <span className="text-danger form-text">Email address</span>
+                                        <input onChange={handleChange} name="email" type="email" id="form3Example3" className={`form-control ${errorStyleEmail}`} placeholder="Email address" />
+                                        {/* <span className={`text-danger form-text ${errorMessageEmail.style}`}>{errorMessageEmail.msg}</span> */}
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input type="password" id="form3Example4" className="form-control border-danger border-2" placeholder="Password"/>
-                                        <span className="text-danger form-text">Password</span>
+                                        <input onChange={handleChange} name="password" type="password" id="form3Example4" className={`form-control ${errorStylePassword}`} placeholder="Password"/>
+                                        <span className={`text-danger form-text ${errorMessage.style}`}>{errorMessage.msg}</span>
                                     </div>
 
                                     <div className="form-check d-flex justify-content-center mb-4">
