@@ -1,8 +1,9 @@
 import "../../../styles/glassmorphism.css";
-import { FaGoogle } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa";
+// import { FaGoogle } from "react-icons/fa";
+// import { FaFacebookF } from "react-icons/fa";
+// import { FaXTwitter } from "react-icons/fa6";
+// import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 // import { useAuth } from "../../../context/AuthProvider/useAuth";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
@@ -69,7 +70,7 @@ function Login() {
 											Login
                                     </button>
 
-                                    <div className="text-center">
+                                    {/* <div className="text-center">
                                         <p className="text-light">or login with:</p>
                                         <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaFacebookF />
                                         </button>
@@ -82,6 +83,10 @@ function Login() {
 
                                         <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaGithub />
                                         </button>
+                                    </div> */}
+
+                                    <div className="text-center">
+                                        <p className="text-light">Don&apos;t have an account yet? <Link to="/signup">Sign up now!</Link></p>
                                     </div>
                                 </form>
                             </div>

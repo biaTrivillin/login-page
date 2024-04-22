@@ -1,6 +1,7 @@
 const express = require("express");
 const server = express();
 const mysql = require("mysql2");
+const cors = require("cors");
 
 const db = mysql.createPool({
     host: "localhost",
@@ -35,6 +36,7 @@ server.post("/register", (req, res) => {
         res.send({msg: "cadastro realizado"});
     })
 })
+
 // server.post("/register", (req, res) => {
 //     const firstName = req.body.firstName;
 //     const lastName = req.body.lastName;

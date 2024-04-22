@@ -1,10 +1,13 @@
 import "../../../styles/glassmorphism.css";
-import { FaGoogle } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa";
+// import { FaGoogle } from "react-icons/fa";
+// import { FaFacebookF } from "react-icons/fa";
+// import { FaXTwitter } from "react-icons/fa6";
+// import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { confirmPasswordValidation, emailValidation, nameValidation, passwordValidation } from "./utils";
+import { useRegister } from "./useRegister";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Signup() {
 
@@ -51,6 +54,18 @@ function Signup() {
 
     };
 
+    const navigate = useNavigate();
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault();
+
+        useRegister(information.firstName, information.lastName, information.email, information.password);
+
+        navigate("/");
+        
+    };
+
 
     return (
         <section className="background-radial-gradient overflow-hidden">
@@ -73,35 +88,35 @@ function Signup() {
 
                         <div className="card bg-transparent border-0 card_container">
                             <div className="card-body px-4 py-5 px-md-5">
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <div className="row">
                                         <div className="col-md-6 mb-4">
                                             <div data-mdb-input-init className="form-outline">
                                                 <input onBlur={handleBlur} onChange={handleChange} name="firstName" type="text" className={`form-control ${errorStyle.firstName}`} placeholder="First name"/>
-                                                <span className={`text-danger form-text opacity-0 ${errorMessage.firstName}`}>Email address</span>
+                                                <span className={`text-danger form-text opacity-0 ${errorMessage.firstName}`}>Use at least 3 characters.</span>
                                             </div>
                                         </div>
                                         <div className="col-md-6 mb-4">
                                             <div data-mdb-input-init className="form-outline">
                                                 <input onBlur={handleBlur} onChange={handleChange} name="lastName" type="text" className={`form-control ${errorStyle.lastName}`} placeholder="Last name"/>
-                                                <span className={`text-danger form-text opacity-0 ${errorMessage.lastName}`}>Email address</span>
+                                                <span className={`text-danger form-text opacity-0 ${errorMessage.lastName}`}>Use at least 3 characters.</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
                                         <input onBlur={handleBlur} onChange={handleChange} name="email" type="email" className={`form-control ${errorStyle.email}`} placeholder="Email address"/>
-                                        <span className={`text-danger form-text opacity-0 ${errorMessage.email}`}>Email address</span>
+                                        <span className={`text-danger form-text opacity-0 ${errorMessage.email}`}>Your email is invalid.</span>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
                                         <input onBlur={handleBlur} onChange={handleChange} name="password" type="password" className={`form-control ${errorStyle.password}`} placeholder="Password"/>
-                                        <span className={`text-danger form-text opacity-0 ${errorMessage.password}`}>Email address</span>
+                                        <span className={`text-danger form-text opacity-0 ${errorMessage.password}`}>Your password must contain at least one uppercase letter, one lowercase letter, and one number.</span>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
                                         <input onBlur={handleBlur} onChange={handleChange} name="confirmPassword" type="password" className={`form-control ${errorStyle.confirmPassword}`} placeholder="Confirm your password"/>
-                                        <span className={`text-danger form-text opacity-0 ${errorMessage.confirmPassword}`}>Email address</span>
+                                        <span className={`text-danger form-text opacity-0 ${errorMessage.confirmPassword}`}>The passwords do not match.</span>
                                     </div>
 
                                     <div className="form-check d-flex justify-content-center mb-4">
@@ -115,7 +130,7 @@ function Signup() {
                                         Sign up
                                     </button>
 
-                                    <div className="text-center">
+                                    {/* <div className="text-center">
                                         <p className="text-light">or sign up with:</p>
                                         <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaFacebookF/>
                                         </button>
@@ -128,6 +143,10 @@ function Signup() {
 
                                         <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaGithub/>
                                         </button>
+                                    </div> */}
+
+                                    <div className="text-center">
+                                        <p className="text-light">Already have an account? <Link to="/">Log in!</Link></p>
                                     </div>
                                 </form>
                             </div>
