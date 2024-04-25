@@ -13,22 +13,9 @@ export function emailValidation(email: string) {
 
 export function passwordValidation(password: string) {
     
-    // const passwordPatternNumber =  /(?=.*\d)/;
-    // const passwordPatternLowerCase =  /(?=.*[a-z])/;
-    // const passwordPatternUpperCase =  /(?=.*[A-Z])/;
-    const passwordPatternUpperCase =  /(?=.*[A-Z])(?=.*\d)(?=.*[a-z])/;
-    // const passwordPatternSpecialCarac =  /(?=.*[$*&@#])/;
-    // const passwordPatternEightCarac =  /^[0-9a-zA-Z$*&@#]{8,}$/;
+    const passwordPattern =  /(?=.*[A-Z])(?=.*\d)(?=.*[a-z])/;
 
-    // const valid = {
-    //     numbers: passwordPatternNumber.test(password),
-    //     lowerCase: passwordPatternLowerCase.test(password),
-    //     upperCase: passwordPatternUpperCase.test(password),
-    //     specialCarac: passwordPatternSpecialCarac.test(password),
-    //     eightCarac: passwordPatternEightCarac.test(password),
-    // };
-
-    if ( passwordPatternUpperCase.test(password)) {
+    if ( passwordPattern.test(password)) {
         return true;
     }
 

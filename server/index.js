@@ -10,16 +10,6 @@ const db = mysql.createPool({
     database: "users"
 })
 
-// server.get("/", (req, res) => {
-//     db.query(
-//         "INSERT INTO dados (firstname, lastname, email, password) VALUES ('Beatriz', 'Trivillin', 'bia@gmail.com', 'bia123')", (err, result) => {
-//             if (err) {
-//                 console.log(err)
-//             }
-//         }
-//     )
-// })
-
 server.use(express.json());
 server.use(cors());
 

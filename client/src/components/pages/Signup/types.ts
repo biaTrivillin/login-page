@@ -5,3 +5,8 @@ export interface User {
     password: string;
     confirmPassword: string;
 }
+
+export interface IPassword {
+    type: string,
+    icon: JSX.Element
+}

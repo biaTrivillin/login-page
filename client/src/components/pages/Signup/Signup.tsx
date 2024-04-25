@@ -7,15 +7,16 @@ import { Link } from "react-router-dom";
 import { User } from "./types";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { IPassword } from "./types";
 
 function Signup() {
 
-    const [passwordStyle, setPasswordStyle] = useState({
+    const [passwordStyle, setPasswordStyle] = useState<IPassword>({
         type: "password",
         icon : <FaRegEye />
     });
 
-    const [confirmPasswordStyle, setConfirmPasswordStyle] = useState({
+    const [confirmPasswordStyle, setConfirmPasswordStyle] = useState<IPassword>({
         type: "password",
         icon : <FaRegEye />
     });
@@ -165,21 +166,6 @@ function Signup() {
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">
                                         Sign up
                                     </button>
-
-                                    {/* <div className="text-center">
-                                        <p className="text-light">or sign up with:</p>
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaFacebookF/>
-                                        </button>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaGoogle/>
-                                        </button>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaXTwitter/>
-                                        </button>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaGithub/>
-                                        </button>
-                                    </div> */}
 
                                     <div className="text-center">
                                         <p className="text-light">Already have an account? <Link to="/">Log in!</Link></p>

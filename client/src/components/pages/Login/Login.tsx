@@ -1,43 +1,19 @@
 import "../../../styles/glassmorphism.css";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAuth } from "../../../context/AuthProvider/useAuth";
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IError, UserLogin } from "./types";
-// import axios from "axios";
-// import { useAuth } from "./useAuth";
-// import { authenticate } from "./utils";
 import { useAuth } from "./useAuth";
-// import { setLocalStorage } from "../../../context/AuthProvider/util";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { IPassword } from "../Signup/types";
 
 function Login() {
-
-    // const [errorMessage, setErrorMessage] = useState("opacity-0");
-
-    // const navigate = useNavigate();
-
-    // const auth = useAuth();
-
-    // async function handleLogin(values: {email: string, password: string}) {
-        
-    //     try {
-    //         await auth.authenticate(values.email, values.password);
-
-    //         navigate("/profile");
-
-    //     } catch (error) {
-    //         setErrorMessage("");
-    // }
-
     const user = {
         email: "",
         password: "",
     };
 
-    const [passwordStyle, setPasswordStyle] = useState({
+    const [passwordStyle, setPasswordStyle] = useState<IPassword>({
         type: "password",
         icon : <FaRegEye />
     });
@@ -116,14 +92,11 @@ function Login() {
                     </div>
 
                     <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
-                        {/* <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
-							<div id="radius-shape-2" className="position-absolute shadow-5-strong"></div> */}
                         <div className="card bg-transparent border-0 card_container">
                             <div className="card-body px-4 py-5 px-md-5">
                                 <form noValidate onSubmit={handleSubmit}>
                                     <div data-mdb-input-init className="form-outline mb-4">
                                         <input onChange={handleChange} name="email" type="email" id="form3Example3" className={`form-control ${errorStyleEmail}`} placeholder="Email address" />
-                                        {/* <span className={`text-danger form-text ${errorMessageEmail.style}`}>{errorMessageEmail.msg}</span> */}
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
@@ -144,21 +117,6 @@ function Login() {
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4">
 											Login
                                     </button>
-
-                                    {/* <div className="text-center">
-                                        <p className="text-light">or login with:</p>
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaFacebookF />
-                                        </button>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaGoogle />
-                                        </button>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaXTwitter />
-                                        </button>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-link btn-floating mx-1"><FaGithub />
-                                        </button>
-                                    </div> */}
 
                                     <div className="text-center">
                                         <p className="text-light">Don&apos;t have an account yet? <Link to="/signup">Sign up now!</Link></p>
