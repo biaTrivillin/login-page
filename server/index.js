@@ -49,6 +49,18 @@ server.post("/login", (req, res) => {
 
 })
 
+server.post("/getUser", (req, res) => {
+    const userId = req.body.userId;
+
+    db.query("SELECT * FROM dados WHERE userid = ?", [userId], (err, result) => {
+        if (err) {
+            res.send(err)
+        }
+        return res.json(result)
+    })
+
+})
+
 server.listen(3000, () => {
     console.log("Server iniciado e rodando na porta 3000!")
 })
