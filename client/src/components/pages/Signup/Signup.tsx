@@ -1,16 +1,35 @@
 import "../../../styles/glassmorphism.css";
-// import { FaGoogle } from "react-icons/fa";
-// import { FaFacebookF } from "react-icons/fa";
-// import { FaXTwitter } from "react-icons/fa6";
-// import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { confirmPasswordValidation, emailValidation, nameValidation, passwordValidation } from "./utils";
 import { useRegister } from "./useRegister";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { User } from "./types";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 function Signup() {
+
+    const [passwordStyle, setPasswordStyle] = useState({
+        type: "password",
+        icon : <FaRegEye />
+    });
+
+    const [confirmPasswordStyle, setConfirmPasswordStyle] = useState({
+        type: "password",
+        icon : <FaRegEye />
+    });
+
+    const passwordState = [
+        {
+            set: setPasswordStyle, 
+            state: passwordStyle
+        },
+        {
+            set: setConfirmPasswordStyle, 
+            state: confirmPasswordStyle
+        }
+    ];
 
     const user = {
         firstName: "",
@@ -69,6 +88,14 @@ function Signup() {
 
     };
 
+    const showPassword = (input: number) => {
+        if (passwordState[input].state.type == "password") {
+            passwordState[input].set({...passwordState[input].state, type: "text", icon: <FaRegEyeSlash />});
+        } else {
+            passwordState[input].set({...passwordState[input].state, type: "password", icon: <FaRegEye />});
+        }
+    };
+
 
     return (
         <section className="background-radial-gradient overflow-hidden">
@@ -113,12 +140,18 @@ function Signup() {
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input onBlur={handleBlur} onChange={handleChange} name="password" type="password" className={`form-control ${errorStyle.password}`} placeholder="Password"/>
+                                        <div className="position-relative">
+                                            <input onBlur={handleBlur} onChange={handleChange} name="password" type={passwordStyle.type} className={`form-control ${errorStyle.password}`} placeholder="Password"/>
+                                            <button onClick={() => showPassword(0)} type="button" className="btn btn-link text-dark position-absolute end-0 top-0">{passwordStyle.icon}</button>
+                                        </div>
                                         <span className={`text-danger form-text opacity-0 ${errorMessage.password}`}>Your password must contain at least one uppercase letter, one lowercase letter, and one number.</span>
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input onBlur={handleBlur} onChange={handleChange} name="confirmPassword" type="password" className={`form-control ${errorStyle.confirmPassword}`} placeholder="Confirm your password"/>
+                                        <div className="position-relative">
+                                            <input onBlur={handleBlur} onChange={handleChange} name="confirmPassword" type={confirmPasswordStyle.type} className={`form-control ${errorStyle.confirmPassword}`} placeholder="Confirm your password"/>
+                                            <button onClick={() => showPassword(1)} type="button" className="btn btn-link text-dark position-absolute end-0 top-0">{confirmPasswordStyle.icon}</button>
+                                        </div>
                                         <span className={`text-danger form-text opacity-0 ${errorMessage.confirmPassword}`}>The passwords do not match.</span>
                                     </div>
 

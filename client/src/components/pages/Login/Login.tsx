@@ -1,8 +1,4 @@
 import "../../../styles/glassmorphism.css";
-// import { FaGoogle } from "react-icons/fa";
-// import { FaFacebookF } from "react-icons/fa";
-// import { FaXTwitter } from "react-icons/fa6";
-// import { FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 // import { useAuth } from "../../../context/AuthProvider/useAuth";
 // import { useState } from "react";
@@ -14,6 +10,8 @@ import { IError, UserLogin } from "./types";
 // import { authenticate } from "./utils";
 import { useAuth } from "./useAuth";
 // import { setLocalStorage } from "../../../context/AuthProvider/util";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 function Login() {
 
@@ -38,6 +36,11 @@ function Login() {
         email: "",
         password: "",
     };
+
+    const [passwordStyle, setPasswordStyle] = useState({
+        type: "password",
+        icon : <FaRegEye />
+    });
 
     const [information, setInformation] = useState<UserLogin>(user);
 
@@ -88,6 +91,14 @@ function Login() {
 
     };
 
+    const showPassword = () => {
+        if (passwordStyle.type == "password") {
+            setPasswordStyle({...passwordStyle, type: "text", icon: <FaRegEyeSlash />});
+        } else {
+            setPasswordStyle({...passwordStyle, type: "password", icon: <FaRegEye />});
+        }
+    };
+
 
     return (
         <section className="background-radial-gradient overflow-hidden">
@@ -116,7 +127,10 @@ function Login() {
                                     </div>
 
                                     <div data-mdb-input-init className="form-outline mb-4">
-                                        <input onChange={handleChange} name="password" type="password" id="form3Example4" className={`form-control ${errorStylePassword}`} placeholder="Password"/>
+                                        <div className="position-relative">
+                                            <input onChange={handleChange} name="password" type={passwordStyle.type} id="form3Example4" className={`form-control ${errorStylePassword}`} placeholder="Password"/>
+                                            <button onClick={showPassword} type="button" className="btn btn-link text-dark position-absolute end-0 top-0">{passwordStyle.icon}</button>
+                                        </div>
                                         <span className={`text-danger form-text ${errorMessage.style}`}>{errorMessage.msg}</span>
                                     </div>
 
