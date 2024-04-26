@@ -32,6 +32,8 @@
 ### ⚛️ ReactJS
 The project was created with **ReactJS**, streamlining the development process and ensuring a more organized and dynamic code.<br><br>
 
+### ⚛️ TypeScript
+
 ### 🖌️ Bootstrap 
 Streamlined development, enabling rapid styling adjustments through utility classes, resulting in more efficient and flexible code.<br><br>
 
