@@ -4,7 +4,7 @@
 
 ## Preview
 <div align="center">
-  <img align="center" src="src/imgs/preview-oclock.gif" width="700px">
+  <img align="center" src="client/src/assets/login.gif" width="700px">
 </div> <br>
 
 ## Stacks used in the project
@@ -41,7 +41,10 @@ Streamlined development, enabling rapid styling adjustments through utility clas
 ESLint was used to maintain code standardization and organization.<br><br>
 
 ### 🐬MySQL
-The database was created using MySQL to securely store all user information.<br><br>
+The database was created using MySQL to securely store all user information.
+<div align="left">
+  <img align="center" src="client/src/assets/database.gif" width="500px">
+</div> <br>
 
 ### 📂 Express API
 To connect the application to the database, a RESTful API was developed using JavaScript and Express.<br><br>
@@ -51,6 +54,9 @@ User data is validated through regex and other means to ensure they are valid in
 
 ### ⚠️ Validation Error Messages
 Implementation of validation error messages, which are displayed whenever the user attempts to submit invalid or incomplete information.<br><br>
+<div align="left">
+  <img align="center" src="client/src/assets/signup.gif" width="500px">
+</div> <br>
 
 ### 👁️ Password visibility
 Password visibility option, enhancing the usability of the page.<br><br>
@@ -58,6 +64,9 @@ Password visibility option, enhancing the usability of the page.<br><br>
 ### 🔒 User Token
 Creation of a token with the login, preventing access by users not logged into the session.<br>
 The token is stored in localStorage and removed upon logout. If the token is not present in localStorage, the user won't have access to the profile, even if they access their designated route.<br><br>
+<div align="left">
+  <img align="center" src="client/src/assets/session.gif" width="500px">
+</div> <br>
 
 ## Running the application 
 
